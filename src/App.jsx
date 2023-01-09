@@ -14,6 +14,41 @@ const Main = styled.main`
   text-align: center;
 `;
 
+const todoList = [
+  { 
+    item: 'Una tarea',
+    completed: false
+  },
+  { 
+    item: 'Otra tarea',
+    completed: false
+  },
+  { 
+    item: 'Una tarea completada',
+    completed: true
+  },
+  { 
+    item: 'Otra tarea',
+    completed: false
+  },
+  { 
+    item: 'Una tarea completada',
+    completed: true
+  },
+  { 
+    item: 'Otra tarea',
+    completed: false
+  },
+  { 
+    item: 'Una tarea completada',
+    completed: true
+  },
+  { 
+    item: 'Otra tarea completada',
+    completed: true
+  },
+];
+
 function App() {
   return (
     <>
@@ -22,7 +57,13 @@ function App() {
         <TodoCounter />
         <TodoSearch />
         <TodoList>
-          <TodoItem />
+          {todoList.map(item => (
+            <TodoItem 
+              todoTask={item.item}
+              completed={item.completed}
+              key={item.item}
+            />
+          ))}
         </TodoList>
         <CreateTodoButton />
       </Main>

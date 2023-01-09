@@ -17,7 +17,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: 'Overpass', sans-serif;
-    background: linear-gradient(90deg, var(--very-dark-purple), var(--dark-purple), var(--purple));
+    background: linear-gradient(90deg, var(--very-dark-purple), var(--dark-purple));
     color: white;
   }
 `;
