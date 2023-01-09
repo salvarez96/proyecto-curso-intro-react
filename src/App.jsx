@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoCounter from './components/TodoCounter';
+import TodoFilter from './components/TodoFilter';
 import TodoSearch from './components/TodoSearch';
 import TodoList from './components/TodoList';
 import TodoItem from './components/TodoItem';
@@ -58,6 +59,7 @@ function App() {
       <Main>
         <h1>TODO app</h1>
         <TodoCounter />
+        <TodoFilter />
         <TodoSearch />
         <TodoList>
           {todoList.map(item => (

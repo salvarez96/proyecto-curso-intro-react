@@ -16,10 +16,8 @@ const Div = styled.div`
 
 export default function TodoCounter() {
   return(
-    <>
-      <Div>
-        <h3>Haz completado 2 de 3 tareas</h3>
-      </Div>
-    </>
+    <Div>
+      <h3>Haz completado 2 de 3 tareas</h3>
+    </Div>
  );
 }
