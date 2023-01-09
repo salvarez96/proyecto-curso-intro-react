@@ -4,14 +4,17 @@ import TodoSearch from './components/TodoSearch';
 import TodoList from './components/TodoList';
 import TodoItem from './components/TodoItem';
 import CreateTodoButton from './components/CreateTodoButton';
-import Header from './components/Header';
 import styled from 'styled-components';
 
 const Main = styled.main`
   width: 80vw;
   max-width: 500px;
-  margin: 50px auto 0;
+  margin: 30px auto 0;
   text-align: center;
+
+  & h1 {
+    margin-bottom: 20px;
+  }
 `;
 
 const todoList = [
@@ -28,23 +31,23 @@ const todoList = [
     completed: true
   },
   { 
-    item: 'Otra tarea',
+    item: 'Otra tarea más',
     completed: false
   },
   { 
-    item: 'Una tarea completada',
+    item: 'Una tarea completada de más',
     completed: true
   },
   { 
-    item: 'Otra tarea',
+    item: 'Otra tarea :v',
     completed: false
   },
   { 
-    item: 'Una tarea completada',
+    item: 'Una tarea completada :v',
     completed: true
   },
   { 
-    item: 'Otra tarea completada',
+    item: 'Otra tarea completada :v:v:v:v:',
     completed: true
   },
 ];
@@ -52,8 +55,8 @@ const todoList = [
 function App() {
   return (
     <>
-      <Header />
       <Main>
+        <h1>TODO app</h1>
         <TodoCounter />
         <TodoSearch />
         <TodoList>

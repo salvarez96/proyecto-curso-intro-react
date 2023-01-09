@@ -8,6 +8,10 @@ const Div = styled.div`
   border-top-right-radius: 10px;
   display: grid;
   place-content: center;
+
+  & h3 {
+    padding: 15px 10px;
+  }
 `;
 
 export default function TodoCounter() {

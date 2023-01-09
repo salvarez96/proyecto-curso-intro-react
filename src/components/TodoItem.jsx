@@ -20,6 +20,17 @@ const Div = styled.div`
     padding: 12px calc(8rem / 16);
   }
 
+  & .icon, .text {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-content: center;
+  }
+
+  & .text {
+    justify-content: flex-start;
+  }
+
   & svg {
     width: 24px;
     height: 24px;
@@ -39,7 +50,7 @@ const Div = styled.div`
   & .close:hover {
     color: red;
     transform: scale(1.1);
-    transition: transform 0.5s;
+    transition: transform 0.2s;
   }
 `;
 
@@ -72,9 +83,15 @@ export default function TodoItem({ todoTask, completed }) {
   return(
     <Completed>
       <Div className={ completed ? 'completed' : ''}>
-        <AiOutlineCheck className="checkMark" />
-        <p>{ todoTask }</p>
-        <AiOutlineCloseCircle className="close" />
+        <div className="icon checkMark">
+          <AiOutlineCheck />
+        </div>
+        <div className="text">
+          <p>{ todoTask }</p>
+        </div>
+        <div className="icon close">
+          <AiOutlineCloseCircle />
+        </div>
       </Div>
     </Completed>
  );
