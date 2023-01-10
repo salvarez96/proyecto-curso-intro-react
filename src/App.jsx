@@ -6,6 +6,7 @@ import TodoList from './components/TodoList';
 import TodoItem from './components/TodoItem';
 import CreateTodoButton from './components/CreateTodoButton';
 import styled from 'styled-components';
+import useLocalStorage from './hooks/useLocalStorage';
 
 // Estilos
 const Main = styled.main`
@@ -35,23 +36,7 @@ const Main = styled.main`
 export default function App() {
 
   // Lógica de localStorage
-  const localStorageTodos = localStorage.getItem('TODOS_V1');
-  
-  let storagedTodos;
-  
-  if(!localStorageTodos) {
-    localStorage.setItem('TODOS_V1', JSON.stringify([]));
-    storagedTodos = [];
-  } else {
-    storagedTodos = JSON.parse(localStorageTodos);
-  }
-  
-  const [todos, setTodos] = React.useState(storagedTodos);
-
-  const saveTodos = newTodosArray => {
-    localStorage.setItem('TODOS_V1', JSON.stringify(newTodosArray));
-    setTodos(newTodosArray);
-  }
+  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);  
   
   // Lógica usada en TodoSearch
   const [searchValue, setSearchValue] = React.useState('');
