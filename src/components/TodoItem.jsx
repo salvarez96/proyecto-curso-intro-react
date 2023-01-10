@@ -79,7 +79,7 @@ const Completed = styled.div`
   }
 `;
 
-export default function TodoItem({ todoTask, completed, toComplete }) {
+export default function TodoItem({ todoTask, completed, toComplete, toDelete }) {
   return(
     <Completed>
       <Div 
@@ -92,7 +92,10 @@ export default function TodoItem({ todoTask, completed, toComplete }) {
         <div className="text">
           <p>{ todoTask }</p>
         </div>
-        <div className="icon close">
+        <div 
+          className="icon close"
+          onClick={toDelete}
+        >
           <AiOutlineCloseCircle />
         </div>
       </Div>

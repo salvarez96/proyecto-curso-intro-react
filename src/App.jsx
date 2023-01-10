@@ -83,7 +83,13 @@ function App() {
       searchedTodos = searchedTodos.filter(item => !item.completed);
       break;
   }
-
+  
+  // Lógica utilizada en TodoCounter
+  const onlyCompletedTasks = todos.filter(item => {
+    return item.completed
+  });
+  
+  // Lógica usada en TodoItem
   const markCompleteTodo = (key) => {
     const tasks = todos.map(item => {
       if(item.task === key) {
@@ -94,10 +100,10 @@ function App() {
     setTodos(tasks);
   }
 
-  // Lógica utilizada en TodoCounter
-  const onlyCompletedTasks = todos.filter(item => {
-    return item.completed
-  });
+  const deleteTask = (key) => {
+    const tasks = todos.splice(todos.findIndex(item => item.task === key), 1);
+    setTodos(tasks);
+  }
 
   return (
     <>
@@ -121,6 +127,7 @@ function App() {
               completed={item.completed}
               key={item.task}
               toComplete={() => markCompleteTodo(item.task)}
+              toDelete={() => deleteTask(item.task)}
             />
           ))}
         </TodoList>
