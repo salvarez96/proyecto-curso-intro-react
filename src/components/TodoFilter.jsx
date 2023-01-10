@@ -12,10 +12,16 @@ const Div = styled.div`
   & .active {
     color: var(--orange);
     text-decoration: underline;
+    
+    &:hover {
+      cursor: default;
+    }
   }
 `;
 
 const P = styled.p`
+  user-select: none;
+  
   &:hover {
     color: var(--orange);
     cursor: pointer;

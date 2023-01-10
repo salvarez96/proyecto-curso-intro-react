@@ -16,12 +16,14 @@ const Completed = styled.div`
       color: green;
     }
 
-    &:hover {
-      border-color: var(--pastel-blue);
-      background-color: var(--purple);
-
-      & .checkMark {
-        color: red;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--pastel-blue);
+        background-color: var(--purple);
+  
+        & .checkMark {
+          color: red;
+        }
       }
     }
   }
@@ -61,21 +63,23 @@ const Div = styled.div`
     height: 24px;
   }
 
-  &:hover {
-    background-color: var(--pastel-blue);
-    border-color: var(--orange);
-    cursor: pointer;
-    opacity: 0.8;
-
-    & .checkMark {
-      color: yellow;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: var(--pastel-blue);
+      border-color: var(--orange);
+      cursor: pointer;
+      opacity: 0.8;
+  
+      & .checkMark {
+        color: yellow;
+      }
     }
-  }
-
-  & .close:hover {
-    color: red;
-    transform: scale(1.1);
-    transition: transform 0.2s;
+  
+    & .close:hover {
+      color: red;
+      transform: scale(1.1);
+      transition: transform 0.2s;
+    }
   }
 `;
 
