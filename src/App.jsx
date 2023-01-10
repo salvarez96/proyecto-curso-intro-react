@@ -7,6 +7,7 @@ import TodoItem from './components/TodoItem';
 import CreateTodoButton from './components/CreateTodoButton';
 import styled from 'styled-components';
 import useLocalStorage from './hooks/useLocalStorage';
+import { todoItemLogic } from './appLogic/todoItemLogic';
 
 // Estilos
 const Main = styled.main`
@@ -71,22 +72,6 @@ export default function App() {
   const onlyCompletedTasks = todos.filter(item => {
     return item.completed
   });
-  
-  // Lógica usada en TodoItem
-  const markCompleteTodo = (key) => {
-    const tasks = todos.map(item => {
-      if(item.task === key) {
-        item.completed = !item.completed;
-      }
-      return item;
-    });
-    saveTodos(tasks);
-  }
-
-  const deleteTask = (key) => {
-    const tasks = todos.splice(todos.findIndex(item => item.task === key), 1);
-    saveTodos(tasks);
-  }
 
   // Conjunto de todos los componentes utilizados en la aplicación
   return (
@@ -109,8 +94,9 @@ export default function App() {
             todoTask={item.task}
             completed={item.completed}
             key={item.task}
-            toComplete={() => markCompleteTodo(item.task)}
-            toDelete={() => deleteTask(item.task)}
+            // La lógica se encuentra en ./appLogic/todoItemLogic.js
+            toComplete={() => todoItemLogic.markCompleteTodo(item.task, todos, saveTodos)}
+            toDelete={() => todoItemLogic.deleteTask(item.task, todos, saveTodos)}
           />
         ))}
       </TodoList>
