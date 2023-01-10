@@ -18,10 +18,20 @@ const InputText = styled.input`
 
 `;
 
-export default function TodoSearch() {
+export default function TodoSearch({ searchValue, setSearchValue }) {
+
+  const searchValueChange = e => {
+    setSearchValue(e.target.value);
+  }
+
   return(
     <>
-      <InputText type='text' placeholder="Busca una tarea..."></InputText>
+      <InputText 
+        type='text' 
+        placeholder="Busca una tarea..."
+        value={searchValue}
+        onChange={searchValueChange}
+      ></InputText>
     </>
  );
 }

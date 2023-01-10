@@ -14,10 +14,25 @@ const Div = styled.div`
   }
 `;
 
-export default function TodoCounter() {
+export default function TodoCounter({ array }) {
+  
+  const completedTodos = array.filter(item => item.completed).length;
+
+  const [completed, setCompleted] = React.useState(completedTodos);
+  const [all, setAll] = React.useState(array.length);
+
+  const completedTodosFunc = (arr) => {
+    setAll(arr.length);
+    setCompleted(
+      arr.filter(item => item.completed).length
+    );
+  }
+
   return(
-    <Div>
-      <h3>Haz completado 2 de 3 tareas</h3>
+    <Div
+      onChange={() => completedTodosFunc(array)}
+    >
+      <h3>Haz completado { completed } de { all } tareas</h3>
     </Div>
  );
 }

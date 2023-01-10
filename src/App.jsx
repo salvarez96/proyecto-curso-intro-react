@@ -20,53 +20,74 @@ const Main = styled.main`
 
 const todoList = [
   { 
-    item: 'Una tarea',
+    task: 'Una tarea',
     completed: false
   },
   { 
-    item: 'Otra tarea',
+    task: 'Otra tarea',
     completed: false
   },
   { 
-    item: 'Una tarea completada',
+    task: 'Una tarea completada',
     completed: true
   },
   { 
-    item: 'Otra tarea más',
+    task: 'Otra tarea más',
     completed: false
   },
   { 
-    item: 'Una tarea completada de más',
+    task: 'Una tarea completada de más',
     completed: true
   },
   { 
-    item: 'Otra tarea :v',
+    task: 'Otra tarea :v',
     completed: false
   },
   { 
-    item: 'Una tarea completada :v',
+    task: 'Una tarea completada :v',
     completed: true
   },
   { 
-    item: 'Otra tarea completada :v:v:v:v:',
+    task: 'Otra tarea completada :v:v:v:v:',
     completed: true
   },
 ];
 
 function App() {
+
+  const [todos, setTodos] = React.useState(todoList);
+  const [searchValue, setSearchValue] = React.useState('');
+  
+  let searchedTodos = [];
+
+  if(!searchValue > 0) {
+    searchedTodos = todos;
+  } else {
+    searchedTodos = todos.filter(todo => {
+      const todoText = todo.task.toLowerCase();
+      const searchText = searchValue.toLowerCase();
+      return todoText.includes(searchText);
+    });
+  }
+
   return (
     <>
       <Main>
         <h1>TODO app</h1>
-        <TodoCounter />
+        <TodoCounter
+          array={todos}
+        />
         <TodoFilter />
-        <TodoSearch />
+        <TodoSearch
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
         <TodoList>
-          {todoList.map(item => (
+          {searchedTodos.map(item => (
             <TodoItem 
-              todoTask={item.item}
+              todoTask={item.task}
               completed={item.completed}
-              key={item.item}
+              key={item.task}
             />
           ))}
         </TodoList>
