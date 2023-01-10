@@ -57,9 +57,11 @@ function App() {
 
   const [todos, setTodos] = React.useState(todoList);
   const [searchValue, setSearchValue] = React.useState('');
+  const [filterValue, setFilterValue] = React.useState('Todos');
   
+  // Lógica usada en TodoSearch
   let searchedTodos = [];
-
+  
   if(!searchValue > 0) {
     searchedTodos = todos;
   } else {
@@ -69,6 +71,16 @@ function App() {
       return todoText.includes(searchText);
     });
   }
+  
+  // Lógica utilizada en TodoFilter
+  switch (filterValue) {
+    case 'Completados':
+      searchedTodos = searchedTodos.filter(item => item.completed);
+      break;
+    case 'Pendientes':
+      searchedTodos = searchedTodos.filter(item => !item.completed);
+      break;
+  }
 
   return (
     <>
@@ -77,7 +89,9 @@ function App() {
         <TodoCounter
           array={todos}
         />
-        <TodoFilter />
+        <TodoFilter
+          filterValue={setFilterValue}
+        />
         <TodoSearch
           searchValue={searchValue}
           setSearchValue={setSearchValue}

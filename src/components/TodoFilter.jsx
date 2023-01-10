@@ -17,49 +17,48 @@ const Div = styled.div`
 
 const P = styled.p`
   &:hover {
-    color: var(--pastel-blue);
+    color: var(--orange);
     cursor: pointer;
   }
-
 `;
 
-export default function TodoFilter() {
-  
-  const text = [
-    {
-      text: 'Todos',
-      disabled: false,
-    },
-    {
-      text: 'Completados',
-      disabled: true
-    },
-    {
-      text: 'Pendientes',
-      disabled: true
-    },
-  ];
+const text = [
+  {
+    text: 'Todos',
+    disabled: false,
+  },
+  {
+    text: 'Completados',
+    disabled: true
+  },
+  {
+    text: 'Pendientes',
+    disabled: true
+  },
+];
 
+export default function TodoFilter({ filterValue }) {
+  
   const [filters, setFilters] = useState(text);
   
-
   const onClickActive = (key) => {
     const taskKey = filters.map(item => {
-      key === item.text 
-        ? item.disabled = false 
-        : item.disabled = true
-
+      if (key === item.text) {
+        item.disabled = false; 
+        filterValue(item.text);
+      } else {
+        item.disabled = true;
+      }
       return item;
     })
     setFilters(taskKey);
   }
 
   return(
-    <Div>
+    <Div >
       {filters.map(item => (
         <P
           key={item.text}
-          disabled={item.disabled}
           className={!item.disabled ? 'active' : ''} 
           onClick={() => onClickActive(item.text)}
         >
