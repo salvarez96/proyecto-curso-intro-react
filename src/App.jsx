@@ -20,21 +20,38 @@ const Main = styled.main`
 `;
 
 // Ejemplo de TODOs
-const todoList = [
-  { task: 'Una tarea', completed: false},
-  { task: 'Otra tarea', completed: false},
-  { task: 'Una tarea completada', completed: true},
-  { task: 'Otra tarea más', completed: false},
-  { task: 'Una tarea completada de más', completed: true},
-  { task: 'Otra tarea :v', completed: false},
-  { task: 'Una tarea completada :v', completed: true},
-  { task: 'Otra tarea completada :v:v:v:v:', completed: true},
-];
+// const todoList = [
+//   { task: 'Una tarea', completed: false},
+//   { task: 'Otra tarea', completed: false},
+//   { task: 'Una tarea completada', completed: true},
+//   { task: 'Otra tarea más', completed: false},
+//   { task: 'Una tarea completada de más', completed: true},
+//   { task: 'Otra tarea :v', completed: false},
+//   { task: 'Una tarea completada :v', completed: true},
+//   { task: 'Otra tarea completada :v:v:v:v:', completed: true},
+// ];
 
 // Componente app
 export default function App() {
 
-  const [todos, setTodos] = React.useState(todoList);
+  // Lógica de localStorage
+  const localStorageTodos = localStorage.getItem('TODOS_V1');
+  
+  let storagedTodos;
+  
+  if(!localStorageTodos) {
+    localStorage.setItem('TODOS_V1', JSON.stringify([]));
+    storagedTodos = [];
+  } else {
+    storagedTodos = JSON.parse(localStorageTodos);
+  }
+  
+  const [todos, setTodos] = React.useState(storagedTodos);
+
+  const saveTodos = newTodosArray => {
+    localStorage.setItem('TODOS_V1', JSON.stringify(newTodosArray));
+    setTodos(newTodosArray);
+  }
   
   // Lógica usada en TodoSearch
   const [searchValue, setSearchValue] = React.useState('');
@@ -61,6 +78,8 @@ export default function App() {
     case 'Pendientes':
       searchedTodos = searchedTodos.filter(item => !item.completed);
       break;
+    default:
+      searchedTodos = todos;
   }
   
   // Lógica utilizada en TodoCounter
@@ -76,12 +95,12 @@ export default function App() {
       }
       return item;
     });
-    setTodos(tasks);
+    saveTodos(tasks);
   }
 
   const deleteTask = (key) => {
     const tasks = todos.splice(todos.findIndex(item => item.task === key), 1);
-    setTodos(tasks);
+    saveTodos(tasks);
   }
 
   // Conjunto de todos los componentes utilizados en la aplicación
