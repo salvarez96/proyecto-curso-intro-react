@@ -7,6 +7,7 @@ import TodoItem from './components/TodoItem';
 import CreateTodoButton from './components/CreateTodoButton';
 import styled from 'styled-components';
 
+// Estilos
 const Main = styled.main`
   width: 80vw;
   max-width: 500px;
@@ -18,42 +19,20 @@ const Main = styled.main`
   }
 `;
 
+// Ejemplo de TODOs
 const todoList = [
-  { 
-    task: 'Una tarea',
-    completed: false
-  },
-  { 
-    task: 'Otra tarea',
-    completed: false
-  },
-  { 
-    task: 'Una tarea completada',
-    completed: true
-  },
-  { 
-    task: 'Otra tarea más',
-    completed: false
-  },
-  { 
-    task: 'Una tarea completada de más',
-    completed: true
-  },
-  { 
-    task: 'Otra tarea :v',
-    completed: false
-  },
-  { 
-    task: 'Una tarea completada :v',
-    completed: true
-  },
-  { 
-    task: 'Otra tarea completada :v:v:v:v:',
-    completed: true
-  },
+  { task: 'Una tarea', completed: false},
+  { task: 'Otra tarea', completed: false},
+  { task: 'Una tarea completada', completed: true},
+  { task: 'Otra tarea más', completed: false},
+  { task: 'Una tarea completada de más', completed: true},
+  { task: 'Otra tarea :v', completed: false},
+  { task: 'Una tarea completada :v', completed: true},
+  { task: 'Otra tarea completada :v:v:v:v:', completed: true},
 ];
 
-function App() {
+// Componente app
+export default function App() {
 
   const [todos, setTodos] = React.useState(todoList);
   
@@ -105,36 +84,33 @@ function App() {
     setTodos(tasks);
   }
 
+  // Conjunto de todos los componentes utilizados en la aplicación
   return (
-    <>
-      <Main>
-        <h1>TODO app</h1>
-        <TodoCounter
-          completed={onlyCompletedTasks.length}
-          all={todos.length}
-        />
-        <TodoFilter
-          filterValue={setFilterValue}
-        />
-        <TodoSearch
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-        />
-        <TodoList>
-          {searchedTodos.map(item => (
-            <TodoItem 
-              todoTask={item.task}
-              completed={item.completed}
-              key={item.task}
-              toComplete={() => markCompleteTodo(item.task)}
-              toDelete={() => deleteTask(item.task)}
-            />
-          ))}
-        </TodoList>
-        <CreateTodoButton />
-      </Main>
-    </>
+    <Main>
+      <h1>TODO app</h1>
+      <TodoCounter
+        completed={onlyCompletedTasks.length}
+        all={todos.length}
+      />
+      <TodoFilter
+        filterValue={setFilterValue}
+      />
+      <TodoSearch
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
+      <TodoList>
+        {searchedTodos.map(item => (
+          <TodoItem 
+            todoTask={item.task}
+            completed={item.completed}
+            key={item.task}
+            toComplete={() => markCompleteTodo(item.task)}
+            toDelete={() => deleteTask(item.task)}
+          />
+        ))}
+      </TodoList>
+      <CreateTodoButton />
+    </Main>
   );
 }
-
-export default App;

@@ -23,18 +23,9 @@ const P = styled.p`
 `;
 
 const text = [
-  {
-    text: 'Todos',
-    disabled: false,
-  },
-  {
-    text: 'Completados',
-    disabled: true
-  },
-  {
-    text: 'Pendientes',
-    disabled: true
-  },
+  { text: 'Todos', disabled: false },
+  { text: 'Completados', disabled: true },
+  { text: 'Pendientes', disabled: true }
 ];
 
 export default function TodoFilter({ filterValue }) {

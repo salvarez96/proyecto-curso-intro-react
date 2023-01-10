@@ -15,7 +15,6 @@ const InputText = styled.input`
     outline: none;
     border-color: var(--orange);
   }
-
 `;
 
 export default function TodoSearch({ searchValue, setSearchValue }) {
@@ -25,13 +24,11 @@ export default function TodoSearch({ searchValue, setSearchValue }) {
   }
 
   return(
-    <>
-      <InputText 
-        type='text' 
-        placeholder="Busca una tarea..."
-        value={searchValue}
-        onChange={searchValueChange}
-      ></InputText>
-    </>
+    <InputText 
+      type='text' 
+      placeholder="Busca una tarea..."
+      value={searchValue}
+      onChange={searchValueChange}
+    ></InputText>
  );
 }

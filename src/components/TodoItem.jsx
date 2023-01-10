@@ -2,6 +2,31 @@ import React from "react";
 import styled from "styled-components";
 import { AiOutlineCheck, AiOutlineCloseCircle } from 'react-icons/ai';
 
+const Completed = styled.div`
+  & .completed {
+    text-decoration: line-through;
+    background-color: var(--very-dark-purple);
+    border-color: var(--orange);
+    
+    & p {
+      opacity: 0.7;
+    }
+
+    & .checkMark {
+      color: green;
+    }
+
+    &:hover {
+      border-color: var(--pastel-blue);
+      background-color: var(--purple);
+
+      & .checkMark {
+        color: red;
+      }
+    }
+  }
+`;
+
 const Div = styled.div`
   width: 100%;
   text-align: start;
@@ -51,31 +76,6 @@ const Div = styled.div`
     color: red;
     transform: scale(1.1);
     transition: transform 0.2s;
-  }
-`;
-
-const Completed = styled.div`
-  & .completed {
-    text-decoration: line-through;
-    background-color: var(--very-dark-purple);
-    border-color: var(--orange);
-    
-    & p {
-      opacity: 0.7;
-    }
-
-    & .checkMark {
-      color: green;
-    }
-
-    &:hover {
-      border-color: var(--pastel-blue);
-      background-color: var(--purple);
-
-      & .checkMark {
-        color: red;
-      }
-    }
   }
 `;
 
