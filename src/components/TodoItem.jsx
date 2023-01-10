@@ -79,10 +79,13 @@ const Completed = styled.div`
   }
 `;
 
-export default function TodoItem({ todoTask, completed }) {
+export default function TodoItem({ todoTask, completed, toComplete }) {
   return(
     <Completed>
-      <Div className={ completed ? 'completed' : ''}>
+      <Div 
+        className={ completed ? 'completed' : ''}
+        onClick={toComplete}
+      >
         <div className="icon checkMark">
           <AiOutlineCheck />
         </div>

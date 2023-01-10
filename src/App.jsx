@@ -56,12 +56,12 @@ const todoList = [
 function App() {
 
   const [todos, setTodos] = React.useState(todoList);
-  const [searchValue, setSearchValue] = React.useState('');
-  const [filterValue, setFilterValue] = React.useState('Todos');
   
   // Lógica usada en TodoSearch
-  let searchedTodos = [];
+  const [searchValue, setSearchValue] = React.useState('');
   
+  let searchedTodos = [];
+
   if(!searchValue > 0) {
     searchedTodos = todos;
   } else {
@@ -73,6 +73,8 @@ function App() {
   }
   
   // Lógica utilizada en TodoFilter
+  const [filterValue, setFilterValue] = React.useState('Todos');
+  
   switch (filterValue) {
     case 'Completados':
       searchedTodos = searchedTodos.filter(item => item.completed);
@@ -82,12 +84,28 @@ function App() {
       break;
   }
 
+  const markCompleteTodo = (key) => {
+    const tasks = todos.map(item => {
+      if(item.task === key) {
+        item.completed = !item.completed;
+      }
+      return item;
+    });
+    setTodos(tasks);
+  }
+
+  // Lógica utilizada en TodoCounter
+  const onlyCompletedTasks = todos.filter(item => {
+    return item.completed
+  });
+
   return (
     <>
       <Main>
         <h1>TODO app</h1>
         <TodoCounter
-          array={todos}
+          completed={onlyCompletedTasks.length}
+          all={todos.length}
         />
         <TodoFilter
           filterValue={setFilterValue}
@@ -102,6 +120,7 @@ function App() {
               todoTask={item.task}
               completed={item.completed}
               key={item.task}
+              toComplete={() => markCompleteTodo(item.task)}
             />
           ))}
         </TodoList>
