@@ -68,18 +68,12 @@ export default function App() {
       searchedTodos = todos;
   }
   
-  // Lógica utilizada en TodoCounter
-  const onlyCompletedTasks = todos.filter(item => {
-    return item.completed
-  });
-
   // Conjunto de todos los componentes utilizados en la aplicación
   return (
     <Main>
       <h1>TODO app</h1>
       <TodoCounter
-        completed={onlyCompletedTasks.length}
-        all={todos.length}
+        array={todos}
       />
       <TodoFilter
         filterValue={setFilterValue}

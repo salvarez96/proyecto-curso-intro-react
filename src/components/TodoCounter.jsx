@@ -14,10 +14,15 @@ const Div = styled.div`
   }
 `;
 
-export default function TodoCounter({ completed, all }) {  
+export default function TodoCounter({ array }) {  
+
+  const onlyCompletedTasks = array.filter(item => {
+    return item.completed
+  });
+
   return(
     <Div>
-      <h3>Haz completado { completed } de { all } tareas</h3>
+      <h3>Haz completado { onlyCompletedTasks.length } de { array.length } tareas</h3>
     </Div>
  );
 }
