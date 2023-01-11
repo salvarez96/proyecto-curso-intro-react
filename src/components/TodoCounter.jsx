@@ -10,11 +10,11 @@ const Div = styled.div`
   place-content: center;
 
   & h3 {
-    padding: 15px 10px;
+    padding: 20px 10px;
   }
 `;
 
-export default function TodoCounter({ array }) {  
+export default function TodoCounter({ array, loading }) {  
 
   const onlyCompletedTasks = array.filter(item => {
     return item.completed
@@ -22,7 +22,17 @@ export default function TodoCounter({ array }) {
 
   return(
     <Div>
-      <h3>Haz completado { onlyCompletedTasks.length } de { array.length } tareas</h3>
+      <h3>
+        {
+          loading ? 'Un momento por favor' : (
+            array.length === 0
+            ? 'No tienes tareas'
+            : (onlyCompletedTasks.length === array.length) > 0 
+            ? 'Haz completado todas las tareas 😄'
+            : `Haz completado ${ onlyCompletedTasks.length } de ${ array.length } ${array.length === 1 ? 'tarea' : 'tareas'}`
+          )
+        }
+      </h3>
     </Div>
  );
 }

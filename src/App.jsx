@@ -35,15 +35,15 @@ const Main = styled.main`
 
 // Componente app
 export default function App() {
-
+  
   // Lógica de localStorage
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);  
+  const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage('TODOS_V1', []);  
   
   // Lógica usada en TodoSearch
   const [searchValue, setSearchValue] = React.useState('');
   
   let searchedTodos = [];
-
+  
   if(!searchValue > 0) {
     searchedTodos = todos;
   } else {
@@ -64,15 +64,14 @@ export default function App() {
     case 'Pendientes':
       searchedTodos = searchedTodos.filter(item => !item.completed);
       break;
-    default:
-      searchedTodos = todos;
   }
-  
+
   // Conjunto de todos los componentes utilizados en la aplicación
   return (
     <Main>
       <h1>TODO app</h1>
       <TodoCounter
+        loading={loading}
         array={todos}
       />
       <TodoFilter
@@ -83,16 +82,24 @@ export default function App() {
         setSearchValue={setSearchValue}
       />
       <TodoList>
-        {searchedTodos.map(item => (
-          <TodoItem 
-            todoTask={item.task}
-            completed={item.completed}
-            key={item.task}
-            // La lógica se encuentra en ./appLogic/todoItemLogic.js
-            toComplete={() => todoItemLogic.markCompleteTodo(item.task, todos, saveTodos)}
-            toDelete={() => todoItemLogic.deleteTask(item.task, todos, saveTodos)}
-          />
-        ))}
+        {loading && <h3>Cargando tareas...</h3>}
+        {error && <h3>Hubo un problema cargando tus tareas 😥</h3>}
+        {
+          todos.length === 0 && !loading
+          ? <h3>Agrega una tarea nueva</h3> 
+          : searchedTodos.length < 1 && !loading && todos.length < 1
+          ? <h3>No tienes tareas con ese nombre 😔</h3> 
+          : searchedTodos.map(item => (
+            <TodoItem 
+              todoTask={item.task}
+              completed={item.completed}
+              key={item.task}
+              // La lógica se encuentra en ./appLogic/todoItemLogic.js
+              toComplete={() => todoItemLogic.markCompleteTodo(item.task, todos, saveTodos)}
+              toDelete={() => todoItemLogic.deleteTask(item.task, todos, saveTodos)}
+            />
+          ))
+        }
       </TodoList>
       <CreateTodoButton />
     </Main>
