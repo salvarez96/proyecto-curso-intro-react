@@ -6,8 +6,9 @@ import TodoList from './components/TodoList';
 import TodoItem from './components/TodoItem';
 import CreateTodoButton from './components/CreateTodoButton';
 import styled from 'styled-components';
-import useLocalStorage from './hooks/useLocalStorage';
-import { todoItemLogic } from './appLogic/todoItemLogic';
+import { TodoGlobalContext } from './context/Provider';
+// import useLocalStorage from './hooks/useLocalStorage';
+// import { todoItemLogic } from './appLogic/todoItemLogic';
 
 // Estilos
 const Main = styled.main`
@@ -35,51 +36,58 @@ const Main = styled.main`
 
 // Componente app
 export default function App() {
+  // // Lógica de localStorage
+  // const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage('TODOS_V1', []);  
   
-  // Lógica de localStorage
-  const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage('TODOS_V1', []);  
+  // // Lógica usada en TodoSearch
+  // const [searchValue, setSearchValue] = React.useState('');
   
-  // Lógica usada en TodoSearch
-  const [searchValue, setSearchValue] = React.useState('');
+  // let searchedTodos = [];
   
-  let searchedTodos = [];
+  // if(!searchValue > 0) {
+    //   searchedTodos = todos;
+    // } else {
+      //   searchedTodos = todos.filter(todo => {
+        //     const todoText = todo.task.toLowerCase();
+        //     const searchText = searchValue.toLowerCase();
+        //     return todoText.includes(searchText);
+        //   });
+        // }
+        
+        // // Lógica utilizada en TodoFilter
+        // const [filterValue, setFilterValue] = React.useState('Todos');
+        
+        // switch (filterValue) {
+          //   case 'Completados':
+  //     searchedTodos = searchedTodos.filter(item => item.completed);
+  //     break;
+  //   case 'Pendientes':
+  //     searchedTodos = searchedTodos.filter(item => !item.completed);
+  //     break;
+  // }
+  const {
+    loading,
+    error,
+    todos,
+    searchedTodos,
+    markCompleteTask,
+    deleteTask
+  } = React.useContext(TodoGlobalContext);
   
-  if(!searchValue > 0) {
-    searchedTodos = todos;
-  } else {
-    searchedTodos = todos.filter(todo => {
-      const todoText = todo.task.toLowerCase();
-      const searchText = searchValue.toLowerCase();
-      return todoText.includes(searchText);
-    });
-  }
-  
-  // Lógica utilizada en TodoFilter
-  const [filterValue, setFilterValue] = React.useState('Todos');
-  
-  switch (filterValue) {
-    case 'Completados':
-      searchedTodos = searchedTodos.filter(item => item.completed);
-      break;
-    case 'Pendientes':
-      searchedTodos = searchedTodos.filter(item => !item.completed);
-      break;
-  }
-
   // Conjunto de todos los componentes utilizados en la aplicación
   return (
     <Main>
       <h1>TODO app</h1>
       <TodoCounter
-        loading={loading}
-        array={todos}
+        // loading={loading}
+        // array={todos}
       />
       <TodoFilter
-        filterValue={setFilterValue}
+        // filterValue={setFilterValue}
       />
       <TodoSearch
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
+        // searchValue={searchValue}
+        // setSearchValue={setSearchValue}
       />
       <TodoList>
         {loading && <h3>Cargando tareas...</h3>}
@@ -95,8 +103,8 @@ export default function App() {
               completed={item.completed}
               key={item.task}
               // La lógica se encuentra en ./appLogic/todoItemLogic.js
-              toComplete={() => todoItemLogic.markCompleteTodo(item.task, todos, saveTodos)}
-              toDelete={() => todoItemLogic.deleteTask(item.task, todos, saveTodos)}
+              toComplete={() => markCompleteTask(item.task)}
+              toDelete={() => deleteTask(item.task)}
             />
           ))
         }

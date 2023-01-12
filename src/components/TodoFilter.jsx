@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { TodoGlobalContext } from "../context/Provider";
 
 const Div = styled.div`
   width: 100%;
@@ -34,7 +35,9 @@ const text = [
   { text: 'Pendientes', disabled: true }
 ];
 
-export default function TodoFilter({ filterValue }) {
+export default function TodoFilter() {
+
+  const {setFilterValue} = React.useContext(TodoGlobalContext);
   
   const [filters, setFilters] = useState(text);
   
@@ -42,7 +45,7 @@ export default function TodoFilter({ filterValue }) {
     const taskKey = filters.map(item => {
       if (key === item.text) {
         item.disabled = false; 
-        filterValue(item.text);
+        setFilterValue(item.text);
       } else {
         item.disabled = true;
       }

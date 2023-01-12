@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { TodoGlobalContext } from "../context/Provider";
 
 const InputText = styled.input`
   width: 100%;
@@ -17,7 +18,9 @@ const InputText = styled.input`
   }
 `;
 
-export default function TodoSearch({ searchValue, setSearchValue }) {
+export default function TodoSearch() {
+
+  const {searchValue, setSearchValue} = React.useContext(TodoGlobalContext);
 
   const searchValueChange = e => {
     setSearchValue(e.target.value);

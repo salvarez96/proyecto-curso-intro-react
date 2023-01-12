@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { TodoGlobalContext } from "../context/Provider";
 
 const Div = styled.div`
   background-color: var(--dark-purple);
@@ -14,9 +15,11 @@ const Div = styled.div`
   }
 `;
 
-export default function TodoCounter({ array, loading }) {  
+export default function TodoCounter() {
 
-  const onlyCompletedTasks = array.filter(item => {
+  const {todos, loading} = React.useContext(TodoGlobalContext);
+
+  const onlyCompletedTasks = todos.filter(item => {
     return item.completed
   });
 
@@ -25,11 +28,11 @@ export default function TodoCounter({ array, loading }) {
       <h3>
         {
           loading ? 'Un momento por favor' : (
-            array.length === 0
+            todos.length === 0
             ? 'No tienes tareas'
-            : (onlyCompletedTasks.length === array.length) > 0 
+            : (onlyCompletedTasks.length === todos.length) > 0 
             ? 'Haz completado todas las tareas 😄'
-            : `Haz completado ${ onlyCompletedTasks.length } de ${ array.length } ${array.length === 1 ? 'tarea' : 'tareas'}`
+            : `Haz completado ${ onlyCompletedTasks.length } de ${ todos.length } ${todos.length === 1 ? 'tarea' : 'tareas'}`
           )
         }
       </h3>
