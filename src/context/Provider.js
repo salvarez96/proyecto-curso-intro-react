@@ -5,10 +5,11 @@ export const TodoGlobalContext = React.createContext();
 
 export const Provider = ({ children }) => {
 
-  // Lógica de localStorage
+  // Custom hook de useLocalStorage.js
   const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage('TODOS_V1', []);  
+  /* ------------------------------------------------------ */
     
-  // Lógica usada en TodoSearch
+  // Valores usados en TodoSearch.jsx:26, 33
   const [searchValue, setSearchValue] = React.useState('');
 
   let searchedTodos = [];
@@ -22,10 +23,11 @@ export const Provider = ({ children }) => {
       return todoText.includes(searchText);
     });
   }
-
-  // Lógica utilizada en TodoFilter
+  /* ------------------------------------------------------- */
+  
+  // Valores usados en TodoFilter.jsx:48
   const [filterValue, setFilterValue] = React.useState('Todos');
-
+  
   switch (filterValue) {
     case 'Completados':
       searchedTodos = searchedTodos.filter(item => item.completed);
@@ -34,7 +36,9 @@ export const Provider = ({ children }) => {
       searchedTodos = searchedTodos.filter(item => !item.completed);
       break;
   }
-
+  /* ------------------------------------------------------- */
+  
+  // Métodos usados en App.jsx
   const markCompleteTask = key => {
     const tasks = todos.map(item => {
       if(item.task === key) {
@@ -49,6 +53,7 @@ export const Provider = ({ children }) => {
     const tasks = todos.splice(todos.findIndex(item => item.task === key), 1);
     saveTodos(tasks);
   }
+  /* ------------------------------------------------------- */
 
   return (
     <TodoGlobalContext.Provider value={{
