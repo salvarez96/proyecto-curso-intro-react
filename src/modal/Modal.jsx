@@ -10,6 +10,7 @@ const Section = styled.section`
   background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   top: 0;
+  transition: all 1s;
 `;
 
 const Div = styled.div`
@@ -23,6 +24,7 @@ const Div = styled.div`
   border-radius: 10px;
   padding: 20px 15px;
   text-align: center;
+  transform: scale(1);
 
   & input[type='text'] {
     margin: 20px 0;
@@ -48,20 +50,22 @@ const Div = styled.div`
 
 export default function Modal() {
 
-  const {searchedTodos} = React.useContext(TodoGlobalContext);
+  const {modalOpen} = React.useContext(TodoGlobalContext);
 
   return (
     <>
-      <Section>
-        <Div>
-          <h3>Agrega una tarea nueva</h3>
-          <InputText
-            type='text'
-            placeholder='Regar las maticas...'
-          />
-          <button type='button' className='add-button'>Agregar</button>
-        </Div>
-      </Section>
+      {modalOpen &&
+        <Section>
+          <Div>
+            <h3>Agrega una tarea nueva</h3>
+            <InputText
+              type='text'
+              placeholder='Regar las maticas...'
+            />
+            <button type='button' className='add-button'>Agregar</button>
+          </Div>
+        </Section>
+      }
     </>
   )
 }

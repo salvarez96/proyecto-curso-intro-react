@@ -55,6 +55,9 @@ export const Provider = ({ children }) => {
   }
   /* ------------------------------------------------------- */
 
+  // Lógica del modal y el botón
+  const [modalOpen, setModalOpen] = React.useState(false);
+
   return (
     <TodoGlobalContext.Provider value={{
       todos,
@@ -66,7 +69,9 @@ export const Provider = ({ children }) => {
       filterValue,
       setFilterValue,
       markCompleteTask,
-      deleteTask
+      deleteTask,
+      modalOpen,
+      setModalOpen
     }}>
       { children }
     </TodoGlobalContext.Provider>
