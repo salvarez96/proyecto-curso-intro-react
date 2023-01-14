@@ -16,23 +16,27 @@ export const InputText = styled.input`
     outline: none;
     border-color: var(--orange);
   }
+
+  &[disabled] {
+    opacity: 0.6;
+  }
 `;
 
 export default function TodoSearch() {
 
-  const {searchValue, setSearchValue} = React.useContext(TodoGlobalContext);
+  const {todos, searchValue, setSearchValue} = React.useContext(TodoGlobalContext);
 
   const searchValueChange = e => {
     setSearchValue(e.target.value);
-    console.log(searchValue);
   }
 
   return(
     <InputText 
       type='text' 
-      placeholder="Busca una tarea..."
+      placeholder={todos.length < 1 ? "Busca una tarea. . . cuando tengas una" : "Busca una tarea . . ."}
       value={searchValue}
       onChange={searchValueChange}
+      disabled={todos.length < 1}
     ></InputText>
  );
 }

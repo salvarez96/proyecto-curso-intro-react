@@ -87,7 +87,7 @@ export default function Modal() {
             <h3>Agrega una tarea nueva</h3>
             <InputText
               type='text'
-              placeholder='Dominar el mundo...'
+              placeholder='Dominar el mundo. . .'
               onChange={getInputValue}
               value={inputValue}
             />
