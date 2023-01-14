@@ -20,18 +20,6 @@ const Main = styled.main`
   }
 `;
 
-// Ejemplo de TODOs
-// const todoList = [
-//   { task: 'Una tarea', completed: false},
-//   { task: 'Otra tarea', completed: false},
-//   { task: 'Una tarea completada', completed: true},
-//   { task: 'Otra tarea más', completed: false},
-//   { task: 'Una tarea completada de más', completed: true},
-//   { task: 'Otra tarea :v', completed: false},
-//   { task: 'Una tarea completada :v', completed: true},
-//   { task: 'Otra tarea completada :v:v:v:v:', completed: true},
-// ];
-
 // Componente app
 export default function App() {
   
@@ -63,9 +51,9 @@ export default function App() {
             <TodoItem 
               todoTask={item.task}
               completed={item.completed}
-              key={item.task}
-              toComplete={() => markCompleteTask(item.task)}
-              toDelete={() => deleteTask(item.task)}
+              key={item.id}
+              toComplete={() => markCompleteTask(item.id)}
+              toDelete={() => deleteTask(item.id)}
             />
           ))
         }

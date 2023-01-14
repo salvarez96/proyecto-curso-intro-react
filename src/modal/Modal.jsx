@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { TodoGlobalContext } from '../context/Provider';
 import { InputText } from '../components/TodoSearch';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const Section = styled.section`
@@ -60,6 +61,7 @@ export default function Modal() {
 
   const getNewTodo = () => {
     const newTodo = {
+      id: uuidv4(),
       task: inputValue,
       complete: false
     }

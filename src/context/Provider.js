@@ -41,7 +41,7 @@ export const Provider = ({ children }) => {
   // Métodos usados en App.jsx
   const markCompleteTask = key => {
     const tasks = todos.map(item => {
-      if(item.task === key) {
+      if(item.id === key) {
         item.completed = !item.completed;
       }
       return item;
@@ -50,7 +50,7 @@ export const Provider = ({ children }) => {
   }
   
   const deleteTask = key => {
-    const tasks = todos.splice(todos.findIndex(item => item.task === key), 1);
+    const tasks = todos.splice(todos.findIndex(item => item.id === key), 1);
     saveTodos(tasks);
   }
   /* ------------------------------------------------------- */
