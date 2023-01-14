@@ -45,7 +45,7 @@ export default function App() {
         {
           todos.length === 0 && !loading
           ? <h3>Agrega una tarea nueva</h3> 
-          : searchedTodos.length < 1 && !loading && todos.length < 1
+          : searchedTodos.length < 1 && !loading && todos.length > 1
           ? <h3>No tienes tareas con ese nombre 😔</h3> 
           : searchedTodos.map(item => (
             <TodoItem 

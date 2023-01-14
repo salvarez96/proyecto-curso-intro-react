@@ -11,7 +11,6 @@ const Section = styled.section`
   background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   top: 0;
-  transition: all 1s;
 `;
 
 const Div = styled.div`
@@ -25,27 +24,36 @@ const Div = styled.div`
   border-radius: 10px;
   padding: 20px 15px;
   text-align: center;
-  transform: scale(1);
 
   & input[type='text'] {
     margin: 20px 0;
     border-radius: 10px;
   }
+`;
 
-  & .add-button {
+const Button = styled.button`
+  &.add-button {
     padding: calc(10rem/16) 22px; 
     font-family: inherit;
     font-size: calc(15rem / 16);
     border-radius: 10px;
-    border: 1px solid var(--orange);
     background-color: var(--dark-purple);
     color: white;
 
-    &:hover {
-      cursor: pointer;
-      background-color: var(--orange);
-      color: black;
+    &.enabled {
+      border: 1px solid var(--orange);
+      
+      &:hover {
+        cursor: pointer;
+        background-color: var(--orange);
+        color: black;
+      }
     }
+  }
+  
+  &.disabled {
+    border: 1px solid transparent;
+    opacity: 0.7;
   }
 `;
 
@@ -60,12 +68,15 @@ export default function Modal() {
   }
 
   const getNewTodo = () => {
-    const newTodo = {
-      id: uuidv4(),
-      task: inputValue,
-      complete: false
+    if(inputValue.length > 0) {
+      const newTodo = {
+        id: uuidv4(),
+        task: inputValue.trim(),
+        complete: false
+      }
+      saveTodos([newTodo, ...todos]);
     }
-    saveTodos([newTodo, ...todos]);
+    setInputValue('');
   }
 
   return (
@@ -76,16 +87,18 @@ export default function Modal() {
             <h3>Agrega una tarea nueva</h3>
             <InputText
               type='text'
-              placeholder='Regar las maticas...'
+              placeholder='Dominar el mundo...'
               onChange={getInputValue}
+              value={inputValue}
             />
-            <button 
+            <Button 
               type='button' 
-              className='add-button'
+              className={`add-button${inputValue.length < 1 ? ' disabled' : ' enabled'}`}
               onClick={getNewTodo}
+              disabled={inputValue.length < 1}
             >
               Agregar
-            </button>
+            </Button>
           </Div>
         </Section>
       }
