@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { TodoGlobalContext } from "../context/Provider";
 
-const InputText = styled.input`
+export const InputText = styled.input`
   width: 100%;
   min-height: 55px;
   padding: 0 15px;

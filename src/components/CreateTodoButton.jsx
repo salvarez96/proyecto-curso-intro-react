@@ -6,6 +6,8 @@ const Div = styled.div`
   margin: 0 auto;
   margin-top: 20px;
   width: max-content;
+  position: relative;
+  z-index: 1;
   
   & svg {
     width: 50px;
