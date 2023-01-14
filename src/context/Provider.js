@@ -71,7 +71,8 @@ export const Provider = ({ children }) => {
       markCompleteTask,
       deleteTask,
       modalOpen,
-      setModalOpen
+      setModalOpen,
+      saveTodos
     }}>
       { children }
     </TodoGlobalContext.Provider>

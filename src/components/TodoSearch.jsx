@@ -24,6 +24,7 @@ export default function TodoSearch() {
 
   const searchValueChange = e => {
     setSearchValue(e.target.value);
+    console.log(searchValue);
   }
 
   return(

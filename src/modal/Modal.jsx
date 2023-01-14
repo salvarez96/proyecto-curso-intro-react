@@ -50,7 +50,21 @@ const Div = styled.div`
 
 export default function Modal() {
 
-  const {modalOpen} = React.useContext(TodoGlobalContext);
+  const {modalOpen, todos, saveTodos} = React.useContext(TodoGlobalContext);
+
+  const [inputValue, setInputValue] = React.useState('');
+
+  const getInputValue = e => {
+    setInputValue(e.target.value);
+  }
+
+  const getNewTodo = () => {
+    const newTodo = {
+      task: inputValue,
+      complete: false
+    }
+    saveTodos([newTodo, ...todos]);
+  }
 
   return (
     <>
@@ -61,8 +75,15 @@ export default function Modal() {
             <InputText
               type='text'
               placeholder='Regar las maticas...'
+              onChange={getInputValue}
             />
-            <button type='button' className='add-button'>Agregar</button>
+            <button 
+              type='button' 
+              className='add-button'
+              onClick={getNewTodo}
+            >
+              Agregar
+            </button>
           </Div>
         </Section>
       }
