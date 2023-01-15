@@ -7,6 +7,7 @@ import TodoItem from './components/TodoItem';
 import CreateTodoButton from './components/CreateTodoButton';
 import styled from 'styled-components';
 import { TodoGlobalContext } from './context/Provider';
+import { NewTaskText } from './components/NewTaskText';
 
 // Estilos
 const Main = styled.main`
@@ -28,6 +29,7 @@ export default function App() {
     error,
     todos,
     searchedTodos,
+    searchValue,
     markCompleteTask,
     deleteTask
   } = React.useContext(TodoGlobalContext);
@@ -43,9 +45,9 @@ export default function App() {
         {loading && <h3>Cargando tareas...</h3>}
         {error && <h3>Hubo un problema cargando tus tareas 😥</h3>}
         {
-          todos.length === 0 && !loading
-          ? <h3>Agrega una tarea nueva</h3> 
-          : searchedTodos.length < 1 && !loading && todos.length > 1
+          todos.length === 0 && !loading 
+          ? <NewTaskText /> 
+          : searchedTodos.length < 1 && searchValue && !loading
           ? <h3>No tienes tareas con ese nombre 😔</h3> 
           : searchedTodos.map(item => (
             <TodoItem 

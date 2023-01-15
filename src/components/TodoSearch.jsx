@@ -33,7 +33,7 @@ export default function TodoSearch() {
   return(
     <InputText 
       type='text' 
-      placeholder={todos.length < 1 ? "Busca una tarea. . . cuando tengas una" : "Busca una tarea . . ."}
+      placeholder={todos.length < 1 ? "Busca una tarea... cuando tengas una" : "Busca una tarea..."}
       value={searchValue}
       onChange={searchValueChange}
       disabled={todos.length < 1}

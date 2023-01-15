@@ -41,6 +41,7 @@ const Div = styled.div`
   border: 1px solid var(--pastel-blue);
   box-shadow: 0 0 4px 0 var(--pastel-blue);
   margin-bottom: 15px;
+  transition: all 0.3s;
 
   & p {
     width: 100%;
@@ -74,11 +75,14 @@ const Div = styled.div`
         color: yellow;
       }
     }
-  
-    & .close:hover {
-      color: red;
-      transform: scale(1.1);
-      transition: transform 0.2s;
+
+    & .close {
+      transition: color 0.5s;
+
+      &:hover {
+        color: red;
+        transform: scale(1.15);
+      }
     }
   }
 `;

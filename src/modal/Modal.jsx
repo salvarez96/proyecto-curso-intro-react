@@ -16,7 +16,7 @@ const Form = styled.form`
   max-width: 400px;
   min-height: 200px;
   position: relative;
-  top: 350px;
+  top: 340px;
   margin: 0 auto;
   background-color: var(--purple);
   border-radius: 10px;
@@ -35,21 +35,23 @@ const Button = styled.button`
     font-family: inherit;
     font-size: calc(15rem / 16);
     border-radius: 10px;
-    background-color: var(--dark-purple);
+    background-color: var(--orange);
     color: white;
-
+    transition: all 0.5s;
+    
     &.enabled {
       border: 1px solid var(--orange);
+      color: black;
       
       &:hover {
         cursor: pointer;
-        background-color: var(--orange);
-        color: black;
+        transform: scale(1.05);
       }
     }
   }
   
   &.disabled {
+    background-color: var(--dark-purple);
     border: 1px solid transparent;
     opacity: 0.7;
   }
@@ -118,7 +120,7 @@ export default function Modal() {
             <TextArea
               type='text'
               id='text-area'
-              placeholder='Tratar de conquistar el mundo. . .'
+              placeholder='Tratar de conquistar el mundo...'
               onChange={getInputValue}
               value={inputValue}
             />

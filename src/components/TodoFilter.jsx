@@ -22,7 +22,8 @@ const Div = styled.div`
 
 const P = styled.p`
   user-select: none;
-  
+  transition: color 0.2s;
+
   &:hover {
     color: var(--orange);
     cursor: pointer;

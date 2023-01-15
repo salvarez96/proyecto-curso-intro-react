@@ -31,7 +31,7 @@ export default function TodoCounter() {
             todos.length === 0
             ? 'No tienes tareas'
             : (onlyCompletedTasks.length === todos.length) > 0 
-            ? 'Haz completado todas las tareas 😄'
+            ? '¡Haz completado todas las tareas!'
             : `Haz completado ${ onlyCompletedTasks.length } de ${ todos.length } ${todos.length === 1 ? 'tarea' : 'tareas'}`
           )
         }
